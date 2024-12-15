@@ -1,0 +1,90 @@
+\chapter{Feasibility Study}
+
+\section{Introduction}
+The LostNFound platform is a centralized web application designed to address the challenges associated with managing lost-and-found items at King Mongkut's University of Technology Thonburi (KMUTT). The platform aims to provide students, staff, and university personnel with an efficient, accessible, and secure solution for reporting and reclaiming lost items.
+
+Unlike the current manual and on-site processes, the LostNFound platform digitizes the entire lost-and-found workflow. Users can report lost items, search for them, and claim ownership through the platform, reducing time and effort. It also introduces features such as real-time item status updates, secure ownership verification, and centralized database management. This initiative aligns with KMUTT’s commitment to modernizing student services and fostering a more convenient university experience.
+
+\section{Problem Statement}
+Currently, KMUTT’s lost-and-found system relies on physical reporting to either nearby security personnel or the Student Affairs Division. This approach is inefficient, time-consuming, and prone to security risks such as unauthorized claims. The lack of a unified system makes tracking and managing lost items cumbersome for both users and staff. Furthermore, the absence of a centralized database means there is no effective way to ensure transparency or accessibility for all stakeholders.
+
+The LostNFound platform aims to resolve these issues by providing a digital solution. The platform will centralize all lost-and-found operations, improve communication between stakeholders, and reduce the time required to locate and reclaim lost items. By introducing advanced features such as user profiles, secure claims verification, and automated notifications, the system will create a seamless experience for KMUTT’s community.
+
+\section{Related Research and Projects}
+\subsection{Lifeguard Lost \& Found}
+A system designed to handle lost and found items in public spaces like airports and transport hubs, which shares similarities with the university setting. It allows users to report, search for, and claim items, ensuring secure ownership verification.
+
+\subsection{MissingX}
+A centralized platform for lost and found items, focusing on automatic matching of lost and found property. The platform also supports user notifications when a match is made, aligning with this system’s goal of real-time updates and seamless matching.
+
+\subsection{ItemFinder}
+Designed specifically for institutions like universities, ItemFinder handles lost and found items by providing a centralized platform for reporting, cataloging, and verifying items.
+
+\subsection{Comparison of Existing Functions}
+\begin{table}[h!]
+\centering
+\caption{Existing Functions of Related Applications}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Applications} & \textbf{Item Reporting} & \textbf{Matching (NLP)} & \textbf{Notifications} & \textbf{History of Claims} & \textbf{User Profiles} \\
+\hline
+Lifeguard Lost \& Found & Yes & No & No & No & No \\
+\hline
+MissingX & Yes & Yes & Yes & No & No \\
+\hline
+ItemFinder & Yes & No & No & No & Yes \\
+\hline
+LostNFound KMUTT & Yes & Yes & Yes & Yes & Yes \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Requirement Specifications}
+\subsection{Functional Requirements}
+\begin{enumerate}
+    \item Report lost and found items by filling out a form with details such as item description, location, and time.
+    \item Provide real-time updates regarding the status of items.
+    \item Use Natural Language Processing (NLP) to match descriptions of lost and found items.
+    \item Notify users when a match is found for their lost item or when their claimed item is ready for pickup.
+    \item Maintain a history of claimed items, including photos and verification details.
+    \item Integrate with the university’s email system (OAuth with Microsoft) for authentication and ownership verification.
+\end{enumerate}
+
+\subsection{Data Requirements}
+\begin{enumerate}
+    \item \textbf{User Information:} Collect and store user details (e.g., phone number, university email, profile information, claim history) for authentication and personalized user experience.
+    \item \textbf{Item Information:} Store details of each lost and found item, including item type, description, location, date, and images.
+\end{enumerate}
+
+\section{Implementation Techniques}
+\subsection{Frontend}
+\begin{itemize}
+    \item Programming Language: TypeScript.
+    \item Framework: Next.js.
+\end{itemize}
+
+\subsection{Backend}
+\begin{itemize}
+    \item Programming Language: TypeScript, Python.
+    \item Frameworks: Next.js, FastAPI.
+\end{itemize}
+
+\subsection{Infrastructure}
+\begin{itemize}
+    \item OS: Debian Linux.
+    \item Cloud Provider: Google Cloud Platform (GCP).
+    \item Containerization: Docker.
+    \item CI/CD: Google Cloud Build.
+    \item Deployment Platform: Google Cloud Run.
+\end{itemize}
+
+\subsection{Database}
+\begin{itemize}
+    \item Database Type: Relational (PostgreSQL).
+\end{itemize}
+
+\subsection{Testing}
+\begin{itemize}
+    \item Unit Testing: Jest.
+    \item API Testing: Postman.
+\end{itemize}

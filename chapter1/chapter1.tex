@@ -1,0 +1,60 @@
+\chapter{Introduction}
+
+\section{Background}
+Losing personal belongings within a university environment is a common challenge, and KMUTT is no exception. Currently, the recovery process involves contacting security personnel in different areas, which can be inefficient and inconvenient for both students and staff. This lack of a centralized system often leads to prolonged delays in retrieving lost items and potential frustrations for the involved parties.
+
+To address these issues, the LostNFound KMUTT platform aims to streamline and enhance the lost-and-found process through a centralized web-based solution. By utilizing modern web technologies and intelligent text-matching models, this platform simplifies reporting, cataloging, and locating lost items.
+
+\section{Objective}
+To create a user-friendly and efficient platform that facilitates the reporting and retrieval of lost items. By integrating modern technology into the existing process, we aim to reduce the complexities associated with lost and found items, making it easier for both users and officers to manage and locate belongings promptly.
+
+\section{Scope}
+\subsection{Target}
+King Mongkut's University of Technology Thonburi (KMUTT).
+
+\subsection{Scope of Work}
+\begin{enumerate}
+    \item Define Project Features:
+    \begin{itemize}
+        \item \textbf{Distinct Features:}
+        \begin{enumerate}
+            \item Item Found \& Lost Form: Allow users who found or lost items to report them, providing the time and location where it was found and describing the item to enable matching.
+                \begin{itemize}
+                    \item Found Item Form.
+                    \item Lost Item Form.
+                \end{itemize}
+            \item Claim Process: Allow users to claim found items after the form is matched.
+                \begin{itemize}
+                    \item Text comparison using Natural Language Processing (NLP).
+                    \item Notification system.
+                \end{itemize}
+            \item Secure Items Ownership: Prevent unauthorized claims using university email authentication.
+        \end{enumerate}
+        \item \textbf{Support Features:}
+        \begin{enumerate}
+            \item Authentication using OAuth with Microsoft authentication.
+            \item History of Claimed Items.
+        \end{enumerate}
+    \end{itemize}
+    \item Architecture and Technology Stack:
+    \begin{itemize}
+        \item \textbf{Frontend:} Next.js 14.
+        \item \textbf{Backend:} Next.js 14 and FastAPI.
+        \item \textbf{Database:} PostgreSQL.
+        \item \textbf{Authentication:} NextAuth.js with Microsoft as the provider.
+        \item \textbf{Infrastructure:} Google Cloud (GCP), Docker.
+        \item \textbf{Model:} Public text similarity and NER model from Hugging Face.
+        \item \textbf{Testing:} Jest (Unit testing), Postman (API testing).
+    \end{itemize}
+\end{enumerate}
+
+\section{Expected Benefits}
+\begin{enumerate}
+    \item \textbf{Efficiency Improvement:} Reduced processing time for reporting, cataloging, and retrieving lost items.
+    \item \textbf{User Convenience:} Accessible information through a user-friendly interface.
+    \item \textbf{Enhanced Security:} Robust identity verification to ensure rightful ownership.
+    \item \textbf{Reduced Frustration:} Simplified processes for users and staff.
+    \item \textbf{Resource Optimization:} Improved productivity for staff by automating processes.
+    \item \textbf{Timely Notifications:} Notifications to remind users to pick up their items.
+    \item \textbf{Documentation and Accountability:} Comprehensive records of claimed items for auditing.
+\end{enumerate}
