@@ -7,3 +7,4 @@ rm *.bbl
 rm *.blg
 rm *.out
 rm *.synctex.gz
+echo "Cleaned up the mess!"
