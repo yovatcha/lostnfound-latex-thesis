@@ -1,148 +1,55 @@
-\chapter{System functionality}
+\chapter{System Functionality}
+
 \section{Introduction}
-This chapter describes the core aspects of the system's functionality, covering its system architecture, primary functions, planning, and testing results that defined the application's capabilities. The first part covers the architecture of the system in this project and the second part covers the main functionality of the system.
-\section{System architecture}
+This chapter describes the core aspects of the system's functionality, covering its architecture, primary functions, planning, and testing results that define the application’s capabilities. The first part explains the system’s architecture, and the second part details the main functionalities.
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\linewidth]{chapter4/sysarch.png}
-    \caption{System architecture}
-    \label{fig:System architecture}
-\end{figure}
-The system will consist of two main components. The first component is frontend, the user-interaction part written as Flutter application which has functionalities of login, using Google OAuth API and has the map preview for user to search for places and navigate through routes. It will have to retrieve raw location data from the device GPS and call to backend using REST API. The second component is backend, which consists of the data manipulation and algorithmic part, which written using Golang. The backend use for retrieve route request from frontend, then All the connections between frontend and backend are proxies trough Cloudflare and internal NGINX reverse proxy. For the backend process, we use MariaDB for relational data store, Neo4j \cite{neo4j} for graph data store, The maps library, Google Maps API and self-hosted OSRM API, is used gather places, routes and any geographic information.
+\section{System Architecture}
+The system architecture consists of two main components designed to deliver an efficient lost-and-found platform:
+\begin{enumerate}
+    \item \textbf{Frontend:} Developed using Next.js, the frontend serves as the user interface for tasks like reporting lost items and browsing found items. It communicates with the backend via REST APIs and is containerized using Docker, deployed on Google Cloud Run for scalability.
+    \item \textbf{Backend:} Built with Next.js and FastAPI, the backend handles advanced functionalities such as Natural Entity Recognition (NER) and text similarity algorithms to automate item matching. Data is managed using a PostgreSQL database hosted on Aiven, ensuring reliable and secure storage. The deployment process is streamlined with a CI/CD pipeline using Google Cloud Build, which automatically builds and deploys container images to Cloud Run, enabling an agile and scalable system.
+\end{enumerate}
 
-\section{Main function}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/welcome_screen.png}
-	\caption{Welcome screen}
-	\label{fig:Welcome screen}
-\end{figure}
-This figure shows the welcome message and login button, Users can log in by Google to register and log into our application.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/home_screen.png}
-	\caption{Home screen}
-	\label{fig:Home screen}
-\end{figure}
-This figure shows the map, current location, the name the current location after logging in and the user can tap the location icon to update the map screen to show their current location. The user can switch between the home screen and the community screen using the bottom navigation bar below.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/choosing_destination_screen.png}
-	\caption{Choosing destination screen}
-	\label{fig:Choosing destination screen}
-\end{figure}
-Users can search routes by specifying both the starting location and the destination to find routes for users.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/choosing_route_screen.png}
-	\caption{Choosing route screen}
-	\label{fig:Choosing route screen}
-\end{figure}
-This figure shows the search route results from the starting location to the destination. All routes are sorted by estimated time of arrival by default and users can see multiple routes to go to the destination.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/route_options_screen.png}
-	\caption{Route options}
-	\label{fig:Route options}
-\end{figure}
-The recommended routes can be sorted according to the user's preferences, such as the fastest arrival time, the cheapest price, the shortest transfer, and the avoid ferry option. 
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/arrival_alert_screen.png}
-	\caption{Arrival alert options}
-	\label{fig:Arrival alert options}
-\end{figure}
-There are alerts that can be set when users are nearing the transfer point or the destination which help them reach their destination accurately.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/selected_route_screen.png}
-	\caption{Selected route screen}
-	\label{fig:Selected route screen}
-\end{figure}
-Users will see the details of the selected route on the map once they select a route from the search route results. From the starting point to the destination, the route polyline is color-coded separately.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/selected_route_detail_screen.png}
-	\caption{Selected route detail screen}
-	\label{fig:Selected route detail screen}
-\end{figure}
-After swiping up the bottom sheet, users will see the details of the selected route including cost, estimated time of arrival, and passed stop of each transport type. Users can tap the Start button for starting to real-time navigation or the Share icon to share the selected route with others.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/real_time_navigation_screen.png}
-	\caption{Real-time navigation screen}
-	\label{fig:Real-time navigation screen}
-\end{figure}
-This screen shows the details of the route in real-time including the current location, estimated arrival time, and the navigation overlay showing the current step with time and the next step at the top of the screen.
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/share_route_screen.png}
-	\caption{Share route screen}
-	\label{fig:Share route screen}
-\end{figure}
-When users tap the Share button, they will receive the generated code and be able to share the code with others without having to search for the route again. 
-
-\newpage
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter4/community_screen.png}
-	\caption{Community screen}
-	\label{fig:Community screen}
-\end{figure}
-This figure shows the suggested places, which are sorted by how often they are searched, and users can search routes based on the code that is generated by others that will navigate them to the shared routes.
-
-\newpage
-\section{Test plan and test result}
-\begin{table}[!h]
-	\centering
-	\resizebox{\linewidth}{!}{%
-		\begin{tblr}{
-				width = \linewidth,
-				colspec = {Q[180]Q[350]Q[492]Q[100]},
-				cell{3}{1} = {r=4}{},
-				cell{7}{1} = {r=7}{},
-				cell{14}{1} = {r=3}{},
-				vlines,
-				hline{1-3,7,14,17} = {-}{},
-				hline{4-6,8-13,15-16} = {2-4}{},
-			}
-			Module         & Test expectation                                                   & Expected result                                                                                                  & Result  \\
-			Authentication & Login with Google                                                  & Successful login to the system with user information provided                                                     & Success \\
-			Home page      & Able to navigate between home page and community page              & Can change tab between two page                                                                                  & Success \\
-			& Able to see the map with the current user location                  & See the map and correct current location                                                                         & Success \\
-			& Able to logout from profile                                        & User is logged out                                                                                               & Success \\
-			& Able to navigate to search page/ choose destination                & Navigate to search page correctly                                                                                & Success \\
-			Routing        & Able to search for places                                          & User sees the list of places from Google API                                                                      & Success \\
-			& Able to sort the route options                                     & User can change the sort by choices to change the travel preferences based on time, cost, and number of transfer & Success \\
-			& Able to see the suggested routes when entering start and end location & User sees the list of suggested routes correctly with the details                                                 & Success \\
-			& Able to navigate to see each route detail                          & User sees the route detail on the map and modal with travel time and cost                                         & Success \\
-			& Able to share the route                                            & User gets a 6-digit code for sharing the route with other users                                                        & Success \\
-			& Able to start the trip                                             & User navigates to the routing screen with a map and directions provided                                               & Success \\
-			& Able to receive notification when an event happens                     & The system alerts the correct notification                                                                            & Success \\
-			Community      & Able to get the exact route when searching by code                    & User navigates to the route detail page correctly                                                                     & Success \\
-			& Able to see the suggested places                                   & List of suggested places displays correctly when entering the community page                                             & Success \\
-			& Able to navigate to suggested routes page from suggested places    & User navigates to the routes selection page correctly                                                                 & Success 
-		\end{tblr}
-	}
-	\caption{Test plan and result}
-	\label{Test plan and result}
+\section{Test Plan and Results}
+\begin{table}[h!]
+\centering
+\caption{Test Plan and Results}
+\begin{tabular}{|l|p{6cm}|l|l|}
+\hline
+\textbf{Module} & \textbf{Test Description} & \textbf{Expectation} & \textbf{Result} \\
+\hline
+Authentication & Login with Microsoft Azure & Can log in with the KMUTT account & Success \\
+\hline
+Home Page & Navigate to Lost Report and Found Report forms & Can navigate to both forms & Success \\
+\hline
+Home Page & Navigate to the user profile page & Correct navigation to profile page & Success \\
+\hline
+Home Page & Log out from the profile & User logged out successfully & Success \\
+\hline
+Create Report Form & Fill in the form & Form is successfully filled and submitted & Success \\
+\hline
+Create Report Form & Validate required fields & Shows error for missing mandatory fields & Success \\
+\hline
+Create Report Form & Submit the report form & Report saved and reflected in the database & Success \\
+\hline
+Matching Process & Match lost items to found items & Matches displayed correctly with similarity score & Success \\
+\hline
+Matching Process & Display contact information of matched user & Contact information displayed correctly & Success \\
+\hline
+History Log & View previous reports filed by the user & Complete list of past reports displayed & Success \\
+\hline
+User Profile & Update user information (e.g., phone number) & User information updated successfully & Success \\
+\hline
+\end{tabular}
 \end{table}
+
+\section{System Functions}
+The system supports the following core functionalities:
+\begin{enumerate}
+    \item \textbf{Authentication:} Users log in using their KMUTT email accounts via Microsoft Azure authentication.
+    \item \textbf{Lost \& Found Reporting:} Users can report lost or found items, specifying descriptions, locations, and timestamps.
+    \item \textbf{Item Matching:} Advanced algorithms like NLP and text similarity are used to compare descriptions of lost and found items.
+    \item \textbf{Notification System:} Users receive timely alerts about potential matches or reminders to retrieve items.
+    \item \textbf{History Log:} A record of past reports and claims is maintained for user reference.
+    \item \textbf{Profile Management:} Users can update personal information, such as contact details, through the platform.
+\end{enumerate}
