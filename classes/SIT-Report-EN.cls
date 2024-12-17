@@ -207,7 +207,7 @@
 \newcommand{\@academicyear}{2560}
 \newcommand{\academicyear}[1]{\renewcommand{\@academicyear}{#1}}
 \newcommand{\submissiontextEN}{A Thesis Submitted in Partial Fulfillment of the Requirements for}
-\newcommand{\@academicyearEN}{2023}
+\newcommand{\@academicyearEN}{2024}
 \newcommand{\academicyearEN}[1]{\renewcommand{\@academicyearEN}{#1}}
 %% Advisor
 \newcommand{\@majoradvisor}{}
@@ -281,15 +281,12 @@
 		\begin{tabular*}{\textwidth}{@{}p{.49\textwidth}p{.49\textwidth}@{}}
 			\textbf{Thesis Committee} & {} \\
 			\vspace*{1em} & {}\\
-			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Chairman of Thesis Committee} \\ 
-			(\@committeeOne) & {} \\
+			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Advisor} \\ 
+			(\@majoradvisor) & {} \\
 			{} & {} \\
 			% \vspace*{0.5em} & \\
-			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Member and Thesis Advisor} \\ 
-			(\@majoradvisor) & {} \\
-			{} & {} \\% \vspace*{0.5em} & \\
-			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Member and Thesis Co-Advisor} \\ 
-			(\@coadvisor) & {} \\
+			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Member} \\ 
+			(\@committeeOne) & {} \\
 			{} & {} \\% \vspace*{0.5em} & \\
 			{\makebox[4cm]{\leavevmode\xleaders\hbox{.}\hfill\kern0pt}} & {Member} \\ 
 			(\@committeeTwo) & {} \\
