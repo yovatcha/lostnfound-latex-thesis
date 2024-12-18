@@ -1,156 +1,83 @@
-\chapter{Analysis and Design}
+\chapter{SYSTEM ANALYSIS AND DESIGN}
+
 \section{Introduction}
 \par
-This chapters covers three topics which are user requirement, business process designs, and system design. The user requirement part discusses the business needs for what users require from the system, The business process design part discusses the activities diagram, use case diagram, and context diagram of the application. Lastly, the system design consists of database design, and system architecture.
+This chapter provides an explanation of our project design in the following sections: analysis of the existing system, diagram, system architecture, system design, and user interface design.
 
-\section{User definition}
-\begin{itemize}
-    \item People who aged around 12 - 40 years old and familiar with English language
-    \item Lived in Bangkok and in the city crowded with technology-accessible people
-    \item People who trying to travel into newly visited place without known directions
-    \item People who want to browse alternative transportation method to reach their destination with their own condition like cost savings, faster route, or less transfer
-\end{itemize}
-\subsection{User persona}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\linewidth]{chapter3/user-persona-1.png}
-    \caption{User one persona}    
-    \label{fig:User one persona}
-\end{figure}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\linewidth]{chapter3/user-persona-2.png}
-    \caption{User two persona}
-    \label{fig:User two persona}
-\end{figure}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\linewidth]{chapter3/user-persona-3.png}
-    \caption{User three persona}
-    \label{fig:User three persona}
-\end{figure}
-\subsection{User requirement analysis}
-\begin{itemize}
-    \item This application helps users to find the best route for traveling.
-    \item This application uses map service provider and our public transportation data such as vans, and mini truck to suggest the route for users.
-    \item This application provides the community to share the routes of traveling of users.
-    \item This application will provide a mobile application for users that use smartphones.
-\end{itemize}
-
-\section{Use case diagram}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.7\linewidth]{chapter3/use-case-diagram.png}
-    \caption{Use case diagram}
-    \label{fig:Use case diagram}
-\end{figure}
+\section{Analysis of the existing system}
 \par
-The actor who is user in the routing system. The user must create an account to login to the system. After the user finds routes to the destination, the system will calculate the cost of traveling and display alternative routes using public transport data, such as vans and mini trucks, so that the user can make informed decisions. In addition, the user can record their trip after reaching the destination. Lastly, the user can share their trip to the community, along with the details of their travel, as well as comment and recommend other users.
+The scope of this project is centered on King Mongkut’s University of Technology Thonburi (KMUTT) as the designated target area. The primary user groups are the personnel within the organization.
+
+\section{User Requirement Analysis}
+\subsection{User Requirements}
+\par
+The following are the functional specifications that users expect from the LostNFound KMUTT platform:
+\begin{enumerate}
+    \item \textbf{Lost and Found Item Reporting:} The system should allow users (students and university staff) to report lost and found items. Users should be able to submit detailed descriptions for the items they are reporting. This information is essential for accurate matching.
+    \item \textbf{Item Matching:} The platform should use advanced text-matching techniques, such as Natural Language Processing (NLP), to compare lost and found item descriptions and ensure the correct matching between them. This allows users to easily identify and claim their belongings.
+    \item \textbf{Secure Claim Process:} The system must verify users' identities using their \textbf{university email} to ensure only the rightful owner can claim an item. The platform should reject any claims from users who cannot prove ownership of the lost item.
+    \item \textbf{History of Claimed Items:} The system needs to maintain a detailed record of all claimed items, including the name and ID of the user who claimed the item. This helps provide accountability and keeps a history of item claims for future reference.
+    \item \textbf{Notification System:} Users should receive timely notifications when a match is found for their lost item or when they are reminded to pick up an item they have claimed.
+    \item \textbf{Authentication and Security:} The system must ensure secure authentication using \textbf{Microsoft Extra ID} to authenticate users. Only users with valid \textbf{KMUTT email accounts} should be able to access the platform and participate in reporting or claiming items.
+\end{enumerate}
+
+\section{System design}
+\subsection{Proposed Architecture Diagram}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\linewidth]{chapter3/architecture-diagram.png}
+    \caption{Architecture Diagram}
+    \label{fig:Architecture Diagram}
+\end{figure}
+\par Figure 3.1 represents our system architecture. The platform will leverage Google Cloud Platform (GCP) for hosting, with Cloud Registry used for storing Docker images, and Cloud Build for automating the build process. The application will run on Cloud Run, providing a serverless environment for deploying containerized applications. For frontend development, we will use Next.js with Tailwind CSS for responsive and stylish web pages. The backend will be developed with FastAPI, which will expose NER and Text Similarity APIs for matching lost and found items. PostgreSQL will be used for storing data related to users and items, hosted on Aiven for managed database services. Docker will be utilized for containerizing the entire application, enabling efficient deployment and scalability within the cloud environment.
 
 \newpage
-\section{Context diagram}
+\subsection{Context Diagram}
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\linewidth]{chapter3/context-diagram.png}
-    \caption{Context diagram}
-    \label{fig:Context diagram}
+    \caption{Context Diagram of LostNFound System}
+    \label{fig:Context Diagram of LostNFound System}
 \end{figure}
-\par
-The context diagram shows the overall of the TravelKit system that required the name, password, user’s location, destination. Then, the system will create choices of the routes, directions and calculate the cost of traveling to the destination.
+\par This figure shows the context diagram for the LostNFound KMUTT system. The diagram illustrates the overall interactions between the users and the system. Users (students and staff) are required to authenticate via their KMUTT email to access the platform. Once authenticated, students can report lost and found items. The core interactions of the system include the submission of item reports, matching items using \textbf{Text Similarity and NER APIs}, and the ability for users to track and claim their lost belongings.
 
-\section{Activity diagram}
-\subsection{Travel process}
+\subsection{Data Flow Diagram}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1\linewidth]{chapter3/travel-process.png}
-    \caption{Travel process}
-    \label{fig:Travel process}
+    \includegraphics[width=1\linewidth]{chapter3/data-flow-diagram.png}
+    \caption{Diagram 0}
+    \label{fig:Diagram 0}
 \end{figure}
 \par
-The travel process for the TravelKit system starts when the user searches for the designated destination. Then, the user will be presented with the default starting point, which the user can either use their current location or select it again. After that, the user will choose their route options, which include the travel cost, time, number of transfers, and the arrival alert. If the user desires to have an arrival alert, the system will enable travel notification. Subsequently, the user can see the provided routes details, choose the route and then start the trip. Meanwhile, the system will start recording the trip and send the notification to the user when they are almost arriving at the destination. Finally, the user can choose either to share their travel route or not. If they choose to do so, the system will save the travel information to improve our system data and user can share to other people in community.
+Figure 3.3 represents the data flow diagram of the LostNFound KMUTT system. The process starts when the user inputs their KMUTT email and password to authenticate. Once authenticated, the user can report a lost or found item by providing item details, such as description, location, and timestamp. The system processes and stores the data in the PostgreSQL database. Users can then view item matches using NLP for text similarity, claim found items, and receive notifications when a match is found or when they need to pick up their claimed item.
 
 \newpage
-\subsection{Community process}
+\subsection{Activity Diagram}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1\linewidth]{chapter3/community-process.png}
-    \caption{Community process}
-    \label{fig:Community process}
+    \includegraphics[width=1\linewidth]{chapter3/activity-diagram.png}
+    \caption{Activity Diagram for student logins and creating lost or found item form of LostNFound System}
+    \label{fig:Activity Diagram for student logins and creating lost or found item form of LostNFound System}
 \end{figure}
 \par
-The community processes for the TravelKit system can be divided into two sub-processes. The first process is for the users who desire to search for routes, which can enter the code to get exact route detail. The second process is for users who wish to find for routes or  places recommendations. The process starts when the user select the destination. Afterwards, the user can view the recommended routes and then select the route they preferred.
+Figure 3-4 represents the flow when the student uses a web application by logging in with Microsoft Extra ID authentication. Once authenticated, the student is directed to the form page where they can choose to create a lost item or found item form. The student fills in the required details, including the item description. After submission, the form data is processed and stored in the system, where it can be used for matching with other lost or found items.
 
 \newpage
-\section{Database design}
-\subsection{Relational Database}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{chapter3/sql-db-schema.png}
-	\caption{Relational Database Schema}
-	\label{fig:Relational Database Schema}
-\end{figure}
-Our database relies on MySQL to store user data efficiently. It is intricately connected with MongoDB, particularly in managing community-related information. This dual-database approach enhances functionality, ensuring seamless integration between individual user data and community features, contributing to a robust and scalable system.
-
-\newpage
-\subsection{non-relational database}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.6\linewidth]{chapter3/nosql-db-schema.png}
-    \caption{Non-Relational Database Schema}
-    \label{fig:Non-Relational Database Schema}
+    \includegraphics[width=1\linewidth]{chapter3/activity-diagram2.png}
+    \caption{Activity Diagram for a matching process of LostNFound System}
+    \label{fig:Activity Diagram for a matching process of LostNFound System}
 \end{figure}
-MongoDB is used for storing transport data, stops, and each stop related to each route. It includes:
-\begin{itemize}
-	\item \textbf{Transports} for storing all data about transport types and transports
-	\item \textbf{Stops} for storing stop data, such as bus stops, train stations, and ports
-	\item \textbf{Transport Stops} for storing all stops that relate to each transport sequentially
-	\item \textbf{Community Routes} for storing shared routes from each users
-	\item \textbf{Suggestion} for storing the most frequently selected destinations by users
-\end{itemize}
-
-\newpage
-\subsection{Graph Database}
-The graph database used for storing routes and stops relationship for using the algorithm to find shortest path based on user queries. The graph consist of nodes and relations which is the following node types:
-\begin{itemize}
-	\item \textbf{STOP} For storing stop or station of all transportation type (e.g. National Theatre, Sanam Luang Bus Terminal, Hua Lamphong, Opposite Tha Phra Chan)
-	\item \textbf{ARL} For each line of Airport Rail Link system
-	\item \textbf{BRT} For each line of Bus Rapid Transit system
-	\item \textbf{BTS} For each line of BTS Skytrain system
-	\item \textbf{BUS} For each route of BMTA bus line
-	\item \textbf{CHE} For each route of Chao Phraya Express Boat
-	\item \textbf{KPS} For each route of minibus and local mini truck
-	\item \textbf{MRT} For each line of Metropolitan Rapid Transit
-	\item \textbf{SRT} For each line of train
-\end{itemize}
 \par
-Concerning relationships, the project incorporates various types tailored for tasks such as shortest path finding  \cite{neo4j2}, performance optimization, and conditional querying. These relationships are categorized as follows:
+Figure 3.5 represents the matching process in the LostNFound KMUTT system. The process begins when a lost item report or a found item report is submitted by a student or staff member. Once the report is submitted, the system uses Natural Language Processing (NLP) and Text Similarity algorithms to compare the item descriptions. The system processes key details such as description, product name, and location to identify potential matches.
 
 \newpage
-\subsubsection{GOTO relationship}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1\linewidth]{chapter3/goto_relationship.png}
-	\caption{GOTO relationship}
-	\label{fig:GOTO relationship}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{chapter3/er-diagram.png}
+    \caption{ER Diagram of LostNFound System}
+    \label{fig:ER Diagram of LostNFound System}
 \end{figure}
-The relation of each two stops that are next to each other and have at least one transportation that pass from one to another (for example, from Sanam Luang stop to National Theatre stop) consider as one-way direction of each side of the road. This relation used for specifying the stop that are available for each bus line to transfer to another
-
-\newpage
-\subsubsection{WALKTO relationship}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1\linewidth]{chapter3/walkto_relationship.png}
-	\caption{WALKTO relationship}
-	\label{fig:WALKTO relationship}
-\end{figure}
-As GOTO relation might not enough for finding the best suitable route, since some stops may not next to each other but user can transfer, walk or reroute between bus line that are in opposite direction for shorter distance. So we create WALKTO relation for all pair of stops that are walkable within 500 meters for querying the route which user can transfer to the nearby stop which are not directly next to each other.
-
-\newpage
-\subsubsection{STOPAT/STOPBY relationship}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1\linewidth]{chapter3/stopat_relationship.png}
-	\caption{STOPAT/STOPBY relationship}
-	\label{fig:STOPAT/STOPBY relationship}
-\end{figure}
-The relationship represent that each transportation line (e.g., bus line, BTS line) are stop at each stop/stations. Each stop are stoppable from many transportation line and each transportation line can pass trough and stoppable at many stop as well.
+\par
+Figure 3.6 represents the conceptual diagram of the LostNFound System which we will use to store information about users and match details.
